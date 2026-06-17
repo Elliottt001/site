@@ -6,6 +6,7 @@ import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
+import { useLanguage, translations } from '@i18n';
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -184,6 +185,11 @@ const Projects = () => {
               external
             }
             html
+            parent {
+              ... on File {
+                name
+              }
+            }
           }
         }
       }
@@ -195,6 +201,7 @@ const Projects = () => {
   const revealArchiveLink = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { t, lang } = useLanguage();
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -214,6 +221,18 @@ const Projects = () => {
   const projectInner = node => {
     const { frontmatter, html } = node;
     const { github, external, title, tech } = frontmatter;
+    const slug = node.parent && node.parent.name;
+    const localizedTitle = translations[`project.${slug}.title`]
+      ? t(`project.${slug}.title`)
+      : title;
+    const localizedBody = translations[`project.${slug}.body`]
+      ? `<p>${t(`project.${slug}.body`)}</p>`
+      : html;
+    const localizedTech = tech
+      ? tech.map((label, i) =>
+        translations[`project.${slug}.tech.${i}`] ? t(`project.${slug}.tech.${i}`) : label,
+      )
+      : tech;
 
     return (
       <div className="project-inner">
@@ -243,18 +262,22 @@ const Projects = () => {
 
           <h3 className="project-title">
             <a href={external} target="_blank" rel="noreferrer">
-              {title}
+              {localizedTitle}
             </a>
           </h3>
 
-          <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
+          <div
+            key={lang}
+            className="project-description"
+            dangerouslySetInnerHTML={{ __html: localizedBody }}
+          />
         </header>
 
         <footer>
-          {tech && (
+          {localizedTech && (
             <ul className="project-tech-list">
-              {tech.map((tech, i) => (
-                <li key={i}>{tech}</li>
+              {localizedTech.map((label, i) => (
+                <li key={i}>{label}</li>
               ))}
             </ul>
           )}
@@ -265,10 +288,10 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection>
-      <h2 ref={revealTitle}>Other Noteworthy Projects</h2>
+      <h2 ref={revealTitle}>{t('projects.heading')}</h2>
 
       <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view the archive
+        {t('projects.archive')}
       </Link>
 
       <ul className="projects-grid">
@@ -303,7 +326,7 @@ const Projects = () => {
       </ul>
 
       <button className="more-button" onClick={() => setShowMore(!showMore)}>
-        Show {showMore ? 'Less' : 'More'}
+        {showMore ? t('projects.less') : t('projects.more')}
       </button>
     </StyledProjectsSection>
   );

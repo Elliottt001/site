@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { navLinks } from '@config';
 import { KEY_CODES } from '@utils';
 import { useOnClickOutside } from '@hooks';
+import { useLanguage } from '@i18n';
 
 const StyledMenu = styled.div`
   display: none;
@@ -153,10 +154,29 @@ const StyledSidebar = styled.aside`
     margin: 10% auto 0;
     width: max-content;
   }
+
+  .lang-toggle {
+    margin: 20px auto 0;
+    padding: 10px 22px;
+    border: 1px solid var(--green);
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: var(--green-tint);
+      outline: 0;
+    }
+  }
 `;
 
 const Menu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, toggleLang, t } = useLanguage();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -256,19 +276,36 @@ const Menu = () => {
           <nav ref={navRef}>
             {navLinks && (
               <ol>
-                {navLinks.map(({ url, name }, i) => (
-                  <li key={i}>
-                    <Link to={url} onClick={() => setMenuOpen(false)}>
-                      {name}
-                    </Link>
-                  </li>
-                ))}
+                {navLinks.map(({ url, name }, i) => {
+                  const navLabelMap = {
+                    About: 'nav.about',
+                    Experience: 'nav.experience',
+                    Work: 'nav.work',
+                    Contact: 'nav.contact',
+                  };
+                  const label = navLabelMap[name] ? t(navLabelMap[name]) : name;
+                  return (
+                    <li key={i}>
+                      <Link to={url} onClick={() => setMenuOpen(false)}>
+                        {label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ol>
             )}
 
             <a href="/resume.pdf" className="resume-link">
-              Resume
+              {t('nav.resume')}
             </a>
+
+            <button
+              type="button"
+              className="lang-toggle"
+              onClick={toggleLang}
+              aria-label={t('nav.langAria')}>
+              {lang === 'zh' ? t('nav.langToEN') : t('nav.langToZH')}
+            </button>
           </nav>
         </StyledSidebar>
       </div>

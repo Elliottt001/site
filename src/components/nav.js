@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import { navLinks } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
+import { useLanguage } from '@i18n';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
 
@@ -148,6 +149,26 @@ const StyledLinks = styled.div`
     margin-left: 15px;
     font-size: var(--fz-xs);
   }
+
+  .lang-toggle {
+    margin-left: 15px;
+    padding: 8px 12px;
+    border: 1px solid var(--green);
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover,
+    &:focus {
+      background-color: var(--green-tint);
+      outline: 0;
+    }
+  }
 `;
 
 const Nav = ({ isHome }) => {
@@ -155,6 +176,7 @@ const Nav = ({ isHome }) => {
   const scrollDirection = useScrollDirection('down');
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { lang, toggleLang, t } = useLanguage();
 
   const handleScroll = () => {
     setScrolledToTop(window.pageYOffset < 50);
@@ -207,9 +229,27 @@ const Nav = ({ isHome }) => {
 
   const ResumeLink = (
     <a className="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-      Resume
+      {t('nav.resume')}
     </a>
   );
+
+  const LangToggle = (
+    <button
+      type="button"
+      className="lang-toggle"
+      onClick={toggleLang}
+      aria-label={t('nav.langAria')}>
+      {lang === 'zh' ? t('nav.langToEN') : t('nav.langToZH')}
+    </button>
+  );
+
+  const navLabelMap = {
+    About: 'nav.about',
+    Experience: 'nav.experience',
+    Work: 'nav.work',
+    Contact: 'nav.contact',
+  };
+  const localizedNavName = name => (navLabelMap[name] ? t(navLabelMap[name]) : name);
 
   return (
     <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
@@ -223,11 +263,12 @@ const Nav = ({ isHome }) => {
                 {navLinks &&
                   navLinks.map(({ url, name }, i) => (
                     <li key={i}>
-                      <Link to={url}>{name}</Link>
+                      <Link to={url}>{localizedNavName(name)}</Link>
                     </li>
                   ))}
               </ol>
               <div>{ResumeLink}</div>
+              <div>{LangToggle}</div>
             </StyledLinks>
 
             <Menu />
@@ -250,7 +291,7 @@ const Nav = ({ isHome }) => {
                     navLinks.map(({ url, name }, i) => (
                       <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
                         <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
-                          <Link to={url}>{name}</Link>
+                          <Link to={url}>{localizedNavName(name)}</Link>
                         </li>
                       </CSSTransition>
                     ))}
@@ -262,6 +303,17 @@ const Nav = ({ isHome }) => {
                   <CSSTransition classNames={fadeDownClass} timeout={timeout}>
                     <div style={{ transitionDelay: `${isHome ? navLinks.length * 100 : 0}ms` }}>
                       {ResumeLink}
+                    </div>
+                  </CSSTransition>
+                )}
+              </TransitionGroup>
+
+              <TransitionGroup component={null}>
+                {isMounted && (
+                  <CSSTransition classNames={fadeDownClass} timeout={timeout}>
+                    <div
+                      style={{ transitionDelay: `${isHome ? (navLinks.length + 1) * 100 : 0}ms` }}>
+                      {LangToggle}
                     </div>
                   </CSSTransition>
                 )}

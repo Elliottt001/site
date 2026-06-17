@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
+import { useLanguage } from '@i18n';
 
 const StyledFooter = styled.footer`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -72,6 +73,7 @@ const Footer = () => {
     stars: null,
     forks: null,
   });
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') {
@@ -105,8 +107,8 @@ const Footer = () => {
       </StyledSocialLinks>
 
       <StyledCredit tabindex="-1">
-        <a href="https://github.com/bchiang7/v4">
-          <div>Designed &amp; Built by Brittany Chiang</div>
+        <a href="https://github.com/Elliottt001">
+          <div>{t('footer.credit')}</div>
 
           {githubInfo.stars && githubInfo.forks && (
             <div className="github-stats">

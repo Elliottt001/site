@@ -443,6 +443,47 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  /* CJK line-height adjustments. Chinese glyphs visually fill the line box
+     more than Latin, so the English 1.3 body feels cramped in Chinese.
+     Bump body, headings, lists, paragraphs, and a few specific blocks. */
+  html[lang^="zh"] {
+    body {
+      line-height: 1.7;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.4;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    ul,
+    ol {
+      li {
+        line-height: 1.7;
+      }
+    }
+
+    .subtitle {
+      line-height: 1.7;
+      a {
+        line-height: 1.7;
+      }
+    }
+
+    .project-description,
+    .inner {
+      line-height: 1.7;
+    }
+  }
+
   ${TransitionStyles};
 
   ${PrismStyles};

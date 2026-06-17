@@ -6,6 +6,7 @@ import { srConfig } from '@config';
 import { KEY_CODES } from '@utils';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
+import { useLanguage, translations } from '@i18n';
 
 const StyledJobsSection = styled.section`
   max-width: 700px;
@@ -181,6 +182,11 @@ const Jobs = () => {
               url
             }
             html
+            parent {
+              ... on File {
+                relativeDirectory
+              }
+            }
           }
         }
       }
@@ -194,6 +200,35 @@ const Jobs = () => {
   const tabs = useRef([]);
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { t, lang } = useLanguage();
+
+  const slugOf = node => {
+    const dir = (node.parent && node.parent.relativeDirectory) || '';
+    const parts = dir.split('/').filter(Boolean);
+    return parts[parts.length - 1] || '';
+  };
+
+  const localize = (key, fallback) => {
+    if (key && translations[key]) {
+      return t(key);
+    }
+    return fallback;
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const bulletKeys = (slug, html) => {
+    // Determine how many bullet keys are translated for this job
+    const items = [];
+    let i = 1;
+    while (translations[`job.${slug}.b${i}`]) {
+      items.push(`job.${slug}.b${i}`);
+      i++;
+    }
+    if (items.length === 0) {
+      return null;
+    }
+    return items;
+  };
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -244,13 +279,15 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+      <h2 className="numbered-heading">{t('jobs.heading')}</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
           {jobsData &&
             jobsData.map(({ node }, i) => {
               const { company } = node.frontmatter;
+              const slug = slugOf(node);
+              const localizedCompany = localize(`job.${slug}.company`, company);
               return (
                 <StyledTabButton
                   key={i}
@@ -262,7 +299,7 @@ const Jobs = () => {
                   tabIndex={activeTabId === i ? '0' : '-1'}
                   aria-selected={activeTabId === i ? true : false}
                   aria-controls={`panel-${i}`}>
-                  <span>{company}</span>
+                  <span>{localizedCompany}</span>
                 </StyledTabButton>
               );
             })}
@@ -274,6 +311,11 @@ const Jobs = () => {
             jobsData.map(({ node }, i) => {
               const { frontmatter, html } = node;
               const { title, url, company, range } = frontmatter;
+              const slug = slugOf(node);
+              const localizedTitle = localize(`job.${slug}.title`, title);
+              const localizedCompany = localize(`job.${slug}.company`, company);
+              const localizedRange = localize(`job.${slug}.range`, range);
+              const bullets = bulletKeys(slug, html);
 
               return (
                 <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
@@ -285,18 +327,26 @@ const Jobs = () => {
                     aria-hidden={activeTabId !== i}
                     hidden={activeTabId !== i}>
                     <h3>
-                      <span>{title}</span>
+                      <span>{localizedTitle}</span>
                       <span className="company">
                         &nbsp;@&nbsp;
                         <a href={url} className="inline-link">
-                          {company}
+                          {localizedCompany}
                         </a>
                       </span>
                     </h3>
 
-                    <p className="range">{range}</p>
+                    <p className="range">{localizedRange}</p>
 
-                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                    {bullets ? (
+                      <ul key={lang}>
+                        {bullets.map((key, bi) => (
+                          <li key={bi}>{t(key)}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                    )}
                   </StyledTabPanel>
                 </CSSTransition>
               );

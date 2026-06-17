@@ -8,6 +8,7 @@ import sr from '@utils/sr';
 import { Layout } from '@components';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
+import { useLanguage, translations } from '@i18n';
 
 const StyledTableContainer = styled.div`
   margin: 100px -20px;
@@ -135,6 +136,7 @@ const ArchivePage = ({ location, data }) => {
   const revealTable = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -152,51 +154,56 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">Archive</h1>
-          <p className="subtitle">A big list of things I’ve worked on</p>
+          <h1 className="big-heading">{t('archive.title')}</h1>
+          <p className="subtitle">{t('archive.subtitle')}</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
           <table>
             <thead>
               <tr>
-                <th>Year</th>
-                <th>Title</th>
-                <th className="hide-on-mobile">Made at</th>
-                <th className="hide-on-mobile">Built with</th>
-                <th>Link</th>
+                <th>{t('archive.year')}</th>
+                <th>{t('archive.titleCol')}</th>
+                <th className="hide-on-mobile">{t('archive.madeAt')}</th>
+                <th className="hide-on-mobile">{t('archive.builtWith')}</th>
+                <th>{t('archive.link')}</th>
               </tr>
             </thead>
             <tbody>
               {projects.length > 0 &&
                 projects.map(({ node }, i) => {
-                  const {
-                    date,
-                    github,
-                    external,
-                    ios,
-                    android,
-                    title,
-                    tech,
-                    company,
-                  } = node.frontmatter;
+                  const { date, github, external, ios, android, title, tech, company } =
+                    node.frontmatter;
+                  const slug = node.parent && node.parent.name;
+                  const localizedTitle = translations[`project.${slug}.title`]
+                    ? t(`project.${slug}.title`)
+                    : title;
+                  const localizedTech = tech
+                    ? tech.map((label, ti) =>
+                      translations[`project.${slug}.tech.${ti}`]
+                        ? t(`project.${slug}.tech.${ti}`)
+                        : label,
+                    )
+                    : tech;
                   return (
                     <tr key={i} ref={el => (revealProjects.current[i] = el)}>
                       <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
 
-                      <td className="title">{title}</td>
+                      <td className="title">{localizedTitle}</td>
 
                       <td className="company hide-on-mobile">
                         {company ? <span>{company}</span> : <span>—</span>}
                       </td>
 
                       <td className="tech hide-on-mobile">
-                        {tech?.length > 0 &&
-                          tech.map((item, i) => (
+                        {localizedTech?.length > 0 &&
+                          localizedTech.map((item, i) => (
                             <span key={i}>
                               {item}
                               {''}
-                              {i !== tech.length - 1 && <span className="separator">&middot;</span>}
+                              {i !== localizedTech.length - 1 && (
+                                <span className="separator">&middot;</span>
+                              )}
                             </span>
                           ))}
                       </td>
@@ -261,6 +268,11 @@ export const pageQuery = graphql`
             company
           }
           html
+          parent {
+            ... on File {
+              name
+            }
+          }
         }
       }
     }

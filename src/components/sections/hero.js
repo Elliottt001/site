@@ -3,6 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
+import { useLanguage } from '@i18n';
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -49,6 +50,7 @@ const StyledHeroSection = styled.section`
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { t, lang } = useLanguage();
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -59,36 +61,44 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
+  const one = <h1>{t('hero.greeting')}</h1>;
+  const two = <h2 className="big-heading">{t('hero.name')}</h2>;
+  const three = <h3 className="big-heading">{t('hero.tagline')}</h3>;
+
+  const bioParts = t('hero.bio').split(/(__ZJU__|__H3C__)/);
   const four = (
     <>
       <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
-        </a>
-        .
+        {bioParts.map((part, i) => {
+          if (part === '__ZJU__') {
+            return (
+              <a key={i} href="https://www.zju.edu.cn/" target="_blank" rel="noreferrer">
+                {t('hero.zju')}
+              </a>
+            );
+          }
+          if (part === '__H3C__') {
+            return (
+              <a key={i} href="https://www.h3c.com/" target="_blank" rel="noreferrer">
+                {t('hero.h3c')}
+              </a>
+            );
+          }
+          return <React.Fragment key={i}>{part}</React.Fragment>;
+        })}
       </p>
     </>
   );
   const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
+    <a className="email-link" href="mailto:rzzhangzju@gmail.com" target="_blank" rel="noreferrer">
+      {t('hero.cta')}
     </a>
   );
 
   const items = [one, two, three, four, five];
 
   return (
-    <StyledHeroSection>
+    <StyledHeroSection key={lang}>
       {prefersReducedMotion ? (
         <>
           {items.map((item, i) => (

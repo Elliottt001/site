@@ -6,6 +6,7 @@ import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
+import { useLanguage, translations } from '@i18n';
 
 const StyledProjectsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
@@ -83,6 +84,13 @@ const StyledProject = styled.li`
       }
     }
     .project-image {
+      grid-column: 1 / 8;
+
+      @media (max-width: 768px) {
+        grid-column: 1 / -1;
+      }
+    }
+    .project-image-fan {
       grid-column: 1 / 8;
 
       @media (max-width: 768px) {
@@ -256,7 +264,7 @@ const StyledProject = styled.li`
     a {
       width: 100%;
       height: 100%;
-      background-color: var(--green);
+      /* background-color: var(--green); */
       border-radius: var(--border-radius);
       vertical-align: middle;
 
@@ -272,7 +280,7 @@ const StyledProject = styled.li`
         }
       }
 
-      &:before {
+      /* &:before {
         content: '';
         position: absolute;
         width: 100%;
@@ -285,20 +293,99 @@ const StyledProject = styled.li`
         transition: var(--transition);
         background-color: var(--navy);
         mix-blend-mode: screen;
-      }
+      } */
     }
 
     .img {
       border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+      /* mix-blend-mode: multiply;
+      filter: grayscale(100%) contrast(1) brightness(90%); */
 
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
         height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
+        /* filter: grayscale(100%) contrast(1) brightness(50%); */
       }
+    }
+  }
+
+  .project-image-fan {
+    grid-column: 6 / -1;
+    grid-row: 1 / -1;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 0;
+    padding-bottom: 60%;
+
+    @media (max-width: 768px) {
+      grid-column: 1 / -1;
+      height: 100%;
+      padding-bottom: 0;
+      opacity: 0.25;
+    }
+  }
+`;
+
+const StyledCardFan = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+
+  @media (max-width: 768px) {
+    min-height: 220px;
+  }
+
+  a {
+    display: block;
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    width: 25%;
+    transform-origin: bottom center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px -10px var(--navy-shadow);
+
+    &:hover,
+    &:focus {
+      outline: 0;
+    }
+
+    .img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+    }
+  }
+
+  .fan-card-left {
+    transform: translateX(-50%) rotate(-15deg);
+    z-index: 1;
+  }
+
+  .fan-card-center {
+    transform: translateX(-50%) translateY(-10px) rotate(0deg);
+    z-index: 3;
+  }
+
+  .fan-card-right {
+    transform: translateX(-50%) rotate(15deg);
+    z-index: 2;
+  }
+
+  &:hover {
+    .fan-card-left {
+      transform: translateX(-50%) translateX(-30%) rotate(-22deg);
+    }
+    .fan-card-right {
+      transform: translateX(-50%) translateX(30%) rotate(22deg);
+    }
+    .fan-card-center {
+      transform: translateX(-50%) translateY(-20px) rotate(0deg);
     }
   }
 `;
@@ -319,12 +406,27 @@ const Featured = () => {
                   gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
                 }
               }
+              cover2 {
+                childImageSharp {
+                  gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
+              cover3 {
+                childImageSharp {
+                  gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
               tech
               github
               external
               cta
             }
             html
+            parent {
+              ... on File {
+                relativeDirectory
+              }
+            }
           }
         }
       }
@@ -335,6 +437,24 @@ const Featured = () => {
   const revealTitle = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { t, lang } = useLanguage();
+
+  // Minimal markdown-to-HTML for translation strings (**bold**, *em*).
+  const mdToHtml = src =>
+    src.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  const featuredBodyHtml = slug => {
+    const parts = [];
+    let i = 1;
+    while (translations[`featured.${slug}.p${i}`]) {
+      parts.push(`<p>${mdToHtml(t(`featured.${slug}.p${i}`))}</p>`);
+      i++;
+    }
+    if (parts.length === 0) {
+      return null;
+    }
+    return parts.join('\n');
+  };
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -348,29 +468,43 @@ const Featured = () => {
   return (
     <section id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
+        {t('featured.heading')}
       </h2>
 
       <StyledProjectsGrid>
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter, html } = node;
-            const { external, title, tech, github, cover, cta } = frontmatter;
+            const { external, title, tech, github, cover, cover2, cover3, cta } = frontmatter;
             const image = getImage(cover);
+            const image2 = getImage(cover2);
+            const image3 = getImage(cover3);
+            const hasFan = Boolean(image2 && image3);
+            const linkHref = external ? external : github ? github : '#';
+            const slug = (() => {
+              const dir = (node.parent && node.parent.relativeDirectory) || '';
+              const parts = dir.split('/').filter(Boolean);
+              return parts[parts.length - 1] || '';
+            })();
+            const localizedTitle = translations[`featured.${slug}.title`]
+              ? t(`featured.${slug}.title`)
+              : title;
+            const localizedHtml = featuredBodyHtml(slug) || html;
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
                   <div>
-                    <p className="project-overline">Featured Project</p>
+                    <p className="project-overline">{t('featured.overline')}</p>
 
                     <h3 className="project-title">
-                      <a href={external}>{title}</a>
+                      <a href={external}>{localizedTitle}</a>
                     </h3>
 
                     <div
+                      key={lang}
                       className="project-description"
-                      dangerouslySetInnerHTML={{ __html: html }}
+                      dangerouslySetInnerHTML={{ __html: localizedHtml }}
                     />
 
                     {tech.length && (
@@ -384,7 +518,7 @@ const Featured = () => {
                     <div className="project-links">
                       {cta && (
                         <a href={cta} aria-label="Course Link" className="cta">
-                          Learn More
+                          {t('featured.learnMore')}
                         </a>
                       )}
                       {github && (
@@ -401,10 +535,36 @@ const Featured = () => {
                   </div>
                 </div>
 
-                <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
-                  </a>
+                <div className={hasFan ? 'project-image-fan' : 'project-image'}>
+                  {hasFan ? (
+                    <StyledCardFan>
+                      <a href={linkHref} className="fan-card-left" aria-label={localizedTitle}>
+                        <GatsbyImage
+                          image={image}
+                          alt={`${localizedTitle} screenshot 1`}
+                          className="img"
+                        />
+                      </a>
+                      <a href={linkHref} className="fan-card-right" aria-label={localizedTitle}>
+                        <GatsbyImage
+                          image={image3}
+                          alt={`${localizedTitle} screenshot 3`}
+                          className="img"
+                        />
+                      </a>
+                      <a href={linkHref} className="fan-card-center" aria-label={localizedTitle}>
+                        <GatsbyImage
+                          image={image2}
+                          alt={`${localizedTitle} screenshot 2`}
+                          className="img"
+                        />
+                      </a>
+                    </StyledCardFan>
+                  ) : (
+                    <a href={linkHref}>
+                      <GatsbyImage image={image} alt={localizedTitle} className="img" />
+                    </a>
+                  )}
                 </div>
               </StyledProject>
             );
