@@ -172,8 +172,7 @@ const ArchivePage = ({ location, data }) => {
             <tbody>
               {projects.length > 0 &&
                 projects.map(({ node }, i) => {
-                  const { date, github, external, ios, android, title, tech, company } =
-                    node.frontmatter;
+                  const { date, github, external, title, tech, company } = node.frontmatter;
                   const slug = node.parent && node.parent.name;
                   const localizedTitle = translations[`project.${slug}.title`]
                     ? t(`project.${slug}.title`)
@@ -220,16 +219,6 @@ const ArchivePage = ({ location, data }) => {
                               <Icon name="GitHub" />
                             </a>
                           )}
-                          {ios && (
-                            <a href={ios} aria-label="Apple App Store Link">
-                              <Icon name="AppStore" />
-                            </a>
-                          )}
-                          {android && (
-                            <a href={android} aria-label="Google Play Store Link">
-                              <Icon name="PlayStore" />
-                            </a>
-                          )}
                         </div>
                       </td>
                     </tr>
@@ -263,8 +252,6 @@ export const pageQuery = graphql`
             tech
             github
             external
-            ios
-            android
             company
           }
           html

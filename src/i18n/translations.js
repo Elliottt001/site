@@ -19,10 +19,10 @@ const translations = {
   // Hero
   'hero.greeting': { en: 'Hi, my name is', zh: '你好，我是' },
   'hero.name': { en: 'Ruizhe Zhang.', zh: '张瑞喆 Elliottt' },
-  'hero.tagline': { en: 'I explore the world with AI agents.', zh: '用智能体探索世界.' },
+  'hero.tagline': { en: 'Exploring the world with AI agents.', zh: '用智能体探索世界.' },
   'hero.bio': {
     en: 'I\'m a software engineering undergraduate at __ZJU__, focused on large language model systems, AI agents, and cloud-native deployment. Currently, I\'m researching attention-free hybrid SSM architectures and interning as an LLM algorithm engineer at __H3C__.',
-    zh: '我是__ZJU__软件工程专业的本科生，专注于大语言模型系统、AI 智能体方向。目前正在研究大模型记忆系统，并在__H3C__担任大模型算法实习工程师。',
+    zh: '我是__ZJU__计算机科学与技术学院本科生，专注于大语言模型系统、AI 智能体方向前沿探索与应用开发。目前正在研究大模型记忆系统，并在__H3C__担任大模型算法实习工程师。',
   },
   'hero.zju': { en: 'Zhejiang University', zh: '浙江大学' },
   'hero.h3c': { en: 'H3C', zh: '新华三' },
@@ -32,11 +32,11 @@ const translations = {
   'about.heading': { en: 'About Me', zh: '关于我' },
   'about.p1': {
     en: 'Hello! I\'m Ruizhe Zhang, a software engineering undergraduate at __ZJU__\'s College of Computer Science and Technology, and a member of the software team at ZJU Inspiration Interdisciplinary Innovation& Entrepreneurship Laboratory.',
-    zh: '你好！我是张瑞喆，__ZJU__计算机科学与技术学院软件工程专业的本科生，同时也是浙江大学启真交叉学科创新创业实验室（X-Lab）软件团队成员。',
+    zh: '你好！我是张瑞喆，__ZJU__计算机科学与技术学院的本科生，浙江大学启真交叉学科创新创业实验室（X-Lab）软件团队成员。',
   },
   'about.p2': {
-    en: 'I work at the intersection of large language models and systems engineering. My research explores attention-free hybrid SSM architectures as a co-first author, and my recent projects focus on multi-agent deployment pipelines, RAG-based research assistants, and long-horizon memory systems for conversational agents.',
-    zh: '我的方向位于大语言模型与系统工程的交叉地带。学术上以共同一作身份探索无注意力的混合 SSM 架构；近期的项目主要围绕对话智能体的长短程记忆系统、多智能体流水线、基于 RAG 的 AI Agent 应用系统。',
+    en: 'I work at the intersection of large language models and systems engineering. My research explores attention-free hybrid SSM architectures and memory systems, and my recent projects focus on multi-agent deployment pipelines, RAG-based research assistants, and long-horizon memory systems for conversational agents.',
+    zh: '研究方向覆盖大语言模型与系统工程。探索过无注意力的混合 SSM 架构，大模型记忆机制；近期的项目主要围绕对话智能体的长短程记忆系统、多智能体流水线、基于 RAG 的 AI Agent 应用系统。',
   },
   'about.p3': {
     en: 'I\'ve had the chance to build production AI systems at __H3C__ and lead the __Sealos__-based AICD project at __Huanjie__, shipping LLM-driven tooling end to end.',
@@ -49,7 +49,7 @@ const translations = {
   'about.zju': { en: 'Zhejiang University', zh: '浙江大学' },
   'about.h3c': { en: 'H3C', zh: '新华三' },
   'about.sealos': { en: 'Sealos', zh: 'Sealos' },
-  'about.huanjie': { en: 'Sealos Cloud', zh: '珠海环界云计算有限公司' },
+  'about.huanjie': { en: 'Sealos Cloud', zh: '环界云计算' },
 
   // Jobs
   'jobs.heading': { en: 'Where I\'ve Worked', zh: '我的工作经历' },
@@ -59,8 +59,8 @@ const translations = {
   'featured.overline': { en: 'Featured Project', zh: '精选项目' },
   'featured.learnMore': { en: 'Learn More', zh: '了解更多' },
 
-  // Projects (Awards)
-  'projects.heading': { en: 'Awards & Honors', zh: '奖项与荣誉' },
+  // Projects
+  'projects.heading': { en: 'Other Noteworthy Projects', zh: '我做过的事情' },
   'projects.archive': { en: 'view the archive', zh: '查看完整列表' },
   'projects.more': { en: 'Show More', zh: '展开更多' },
   'projects.less': { en: 'Show Less', zh: '收起' },
@@ -85,8 +85,8 @@ const translations = {
 
   // Footer
   'footer.credit': {
-    en: 'Copyright © 2026 Ruizhe Zhang All rights reserved. ',
-    zh: '版权所有 © 2026 张瑞喆 保留所有权利。',
+    en: 'Designed by Bchiang Chiang',
+    zh: '由 Bchiang Chiang 设计',
   },
 
   // ====== Markdown-driven content (mirrors files in content/) ======
@@ -108,7 +108,7 @@ const translations = {
   },
 
   'job.Huanjie.title': { en: 'AICD Project Lead', zh: 'AICD 项目负责人' },
-  'job.Huanjie.company': { en: 'Sealos Cloud', zh: '珠海环界云' },
+  'job.Huanjie.company': { en: 'Sealos Cloud', zh: '环界云计算' },
   'job.Huanjie.range': { en: 'January - April 2026', zh: '2026 年 1 月 - 4 月' },
   'job.Huanjie.b1': {
     en: 'Led development of an LLM-driven AICD system that removes traditional K8s/Docker operations barriers, enabling one-click automatic deployment of arbitrary GitHub projects onto the Sealos cloud OS.',
@@ -123,21 +123,21 @@ const translations = {
     zh: '深度封装 K8s 客户端，构建动态 YAML 渲染与下发引擎，将复杂的集群资源管理转化为大模型可理解、可生成的声明式指令。',
   },
 
-  'job.ZJUXLab.title': { en: 'Student', zh: '学生' },
-  'job.ZJUXLab.company': { en: 'ZJU Student Affairs', zh: '浙江大学学生工作' },
-  'job.ZJUXLab.range': { en: 'September 2024 - Present', zh: '2024 年 9 月 - 至今' },
-  'job.ZJUXLab.b1': {
-    en: 'Member of the software technology team at Zhejiang University\'s Inspiration Interdisciplinary Innovation& Entrepreneurship Laboratory (X-Lab), participate in the research and commercialization of interdisciplinary laboratory projects.',
-    zh: '浙江大学启真交叉学科创新创业实验室（X-Lab）软件技术团队成员，参与实验室交叉学科落地项目研究与成果转化。',
-  },
-  'job.ZJUXLab.b2': {
-    en: 'Deputy Secretary of the Second General Branch of the Communist Youth League at Yunfeng College, Qiushi Honors School, organizing student initiatives, membership work and large-scale event operation alongside coursework.',
-    zh: '求是学院云峰学园第二总支副书记，组织和推动学生工作、团员工作、大型活动运营。',
-  },
-  'job.ZJUXLab.b3': {
-    en: 'Member of the Student Union at the College of Computer Science and Technology, organizing multiple events within the college',
-    zh: '浙江大学计算机科学与技术学院学生会干事，承办学院内多场活动',
-  },
+  // 'job.ZJUXLab.title': { en: 'Student', zh: '学生' },
+  // 'job.ZJUXLab.company': { en: 'ZJU Student Affairs', zh: '浙江大学学生工作' },
+  // 'job.ZJUXLab.range': { en: 'September 2024 - Present', zh: '2024 年 9 月 - 至今' },
+  // 'job.ZJUXLab.b1': {
+  //   en: 'Member of the software technology team at Zhejiang University\'s Inspiration Interdisciplinary Innovation& Entrepreneurship Laboratory (X-Lab), participate in the research and commercialization of interdisciplinary laboratory projects.',
+  //   zh: '浙江大学启真交叉学科创新创业实验室（X-Lab）软件技术团队成员，参与实验室交叉学科落地项目研究与成果转化。',
+  // },
+  // 'job.ZJUXLab.b2': {
+  //   en: 'Deputy Secretary of the Second General Branch of the Communist Youth League at Yunfeng College, Qiushi Honors School, organizing student initiatives, membership work and large-scale event operation alongside coursework.',
+  //   zh: '求是学院云峰学园第二总支副书记，组织和推动学生工作、团员工作、大型活动运营。',
+  // },
+  // 'job.ZJUXLab.b3': {
+  //   en: 'Member of the Student Union at the College of Computer Science and Technology, organizing multiple events within the college',
+  //   zh: '浙江大学计算机科学与技术学院学生会干事，承办学院内多场活动',
+  // },
 
   // Featured projects
   'featured.CozeSearchAgent.title': {
@@ -171,69 +171,224 @@ const translations = {
     zh: '无注意力的混合 SSM 架构研究',
   },
   'featured.SSMResearch.p1': {
-    en: 'Co-first author on a research project addressing how to balance **local detail precision** and **long-range dependency memory** in large-scale sequence and vision modeling under a constrained compute budget. We propose an **attention-free hybrid architecture** unifying the efficiency of SSMs with the fine-grained feature capacity of Transformers, using *k* learnable concept centers for **soft bucketing** that reduces O(n²) complexity to near-linear O(nk + k²), achieving **SOTA** on multiple benchmarks.',
-    zh: '作为共同一作的研究项目，关注在有限算力下大规模序列与视觉建模中如何兼顾**局部细节精度**与**长程依赖记忆**。我们提出一种**无注意力的混合架构**，融合 SSM 的高效性与 Transformer 的细粒度特征建模能力，借助 *k* 个可学习的概念中心进行**软分桶**，将 O(n²) 复杂度降至近线性的 O(nk + k²)，并在多个 benchmark 上达到 **SOTA**。',
-  },
-  'featured.SSMResearch.p2': {
-    en: 'I designed and implemented the core **routing and interaction module** — a dynamic router for token soft-bucketing and a concept graph for global interaction with adaptive routing policy and graph complexity — built the training framework with key regularizers (e.g. load-balancing loss) to prevent mode collapse, and ran end-to-end experiments by restructuring ImageNet-1K, Food-101, AGNews, and ACL-IMDb from semi-structured raw data into the training format.',
-    zh: '我设计并实现了核心的**路由与交互模块**——用于 token 软分桶的动态路由器，以及具有自适应路由策略与图复杂度的概念图全局交互模块；搭建了训练框架并加入关键正则项（如负载均衡损失）防止模式坍塌；并将 ImageNet-1K、Food-101、AGNews、ACL-IMDb 从半结构化原始数据重构为训练所需格式，跑通了端到端实验。',
+    en: 'Co-first author on a research project addressing how to balance **local detail precision** and **long-range dependency memory** in large-scale sequence and vision modeling under a constrained compute budget. We propose an **attention-free hybrid architecture** unifying the efficiency of SSMs with the fine-grained feature capacity of Transformers, reducing O(n²) complexity to near-linear, achieving **SOTA** on multiple benchmarks.',
+    zh: '作为共同一作的研究项目，关注在有限算力下大规模序列与视觉建模中如何兼顾**局部细节精度**与**长程依赖记忆**。我们提出一种**无注意力的混合架构**，融合 SSM 的高效性与 Transformer 的细粒度特征建模能力，将二次复杂度降至近线性，并在多个 benchmark 上达到 **SOTA**。',
   },
 
-  // Projects / Awards (filename → key)
-  'project.AIHackathon2026.title': {
-    en: 'AI Hackathon Tour 2026 — ZJU Stop',
-    zh: '2026 AI Hackathon Tour 浙大站',
+  // Projects (filename → key)
+  'project.IntelliDeploy.title': {
+    en: 'IntelliDeploy',
+    zh: 'IntelliDeploy',
   },
-  'project.AIHackathon2026.body': {
-    en: 'Runner-up (2nd place) at AI Hackathon Tour 2026, Zhejiang University stop — building and shipping an AI-powered application end to end during the competition.',
-    zh: '在 2026 AI Hackathon Tour 浙大站获得亚军（第二名），赛中从零端到端构建并交付一款 AI 驱动的应用。',
+  'project.IntelliDeploy.body': {
+    en: 'The world\'s first app that takes an idea to production with a single chat and a single click — a next-gen idea-to-product delivery loop.',
+    zh: '全球首款用户通过一次对话一次点击即可将想法急速落地的应用，做新一代的创意 — 产品交付闭环。',
   },
-  'project.AIHackathon2026.tech.0': { en: '2nd Place', zh: '亚军' },
-  'project.AIHackathon2026.tech.1': { en: 'Hackathon', zh: '黑客松' },
+  'project.IntelliDeploy.tech.0': { en: 'Python', zh: 'Python' },
+  'project.IntelliDeploy.tech.1': { en: 'TypeScript', zh: 'TypeScript' },
+  'project.IntelliDeploy.tech.2': { en: 'LLM Agents', zh: '大模型智能体' },
 
-  'project.CRRCCup2026.title': {
+  'project.Pawzzle.title': {
+    en: 'Pawzzle',
+    zh: 'Pawzzle 寻爪',
+  },
+  'project.Pawzzle.body': {
+    en: 'An AI-Agent-driven human–pet matching and onboarding-support product, addressing stray-animal abandonment and shelter survival crises.',
+    zh: '一款 AI Agent 驱动的人宠匹配 + 磨合期支持产品，解决流浪动物弃养困境与救助站生存危机。',
+  },
+  'project.Pawzzle.tech.0': { en: 'TypeScript', zh: 'TypeScript' },
+  'project.Pawzzle.tech.1': { en: 'Java', zh: 'Java' },
+  'project.Pawzzle.tech.2': { en: 'AI Agent', zh: 'AI 智能体' },
+
+  'project.TradingAgent.title': {
+    en: 'Trading-Agent',
+    zh: 'Trading-Agent',
+  },
+  'project.TradingAgent.body': {
+    en: 'A LangChain-based stock analysis platform that pushes first-hand insights to WeChat, making investment information easier to access.',
+    zh: '基于 LangChain 的股票分析平台，并将一手咨询推送到微信，让投资信息更加便捷地被获取。',
+  },
+  'project.TradingAgent.tech.0': { en: 'Python', zh: 'Python' },
+  'project.TradingAgent.tech.1': { en: 'LangChain', zh: 'LangChain' },
+  'project.TradingAgent.tech.2': { en: 'WeChat', zh: '微信' },
+
+  'project.PythonHelper.title': {
+    en: 'Python AI Teaching Assistant',
+    zh: 'Python AI 助教',
+  },
+  'project.PythonHelper.body': {
+    en: 'Co-developed with Zhejiang University\'s Python teaching group — an AI teaching assistant exploring the next generation of learning platforms.',
+    zh: '与浙江大学 Python 课题组合作开发 AI 助教，探索下一代学习平台。',
+  },
+  'project.PythonHelper.tech.0': { en: 'JavaScript', zh: 'JavaScript' },
+  'project.PythonHelper.tech.1': { en: 'Python', zh: 'Python' },
+  'project.PythonHelper.tech.2': { en: 'LLM', zh: '大模型' },
+
+  'project.CozeSearchAgent.title': {
+    en: 'Research Database AI Agent',
+    zh: '科研数据库 AI Agent',
+  },
+  'project.CozeSearchAgent.body': {
+    en: 'A ZJU-flavored Google Scholar — quickly connecting entrepreneurs with ZJU professors to streamline research commercialization.',
+    zh: 'Google Scholar 浙大版，快速对接企业家与浙大教授，优化成果转化链路。',
+  },
+  'project.CozeSearchAgent.tech.0': { en: 'JavaScript', zh: 'JavaScript' },
+  'project.CozeSearchAgent.tech.1': { en: 'Coze', zh: 'Coze' },
+  'project.CozeSearchAgent.tech.2': { en: 'RAG', zh: 'RAG' },
+
+  'project.HumiHop.title': {
+    en: 'HumiHop App',
+    zh: 'HumiHop App',
+  },
+  'project.HumiHop.body': {
+    en: 'A dance-teaching platform with precise motion capture, letting you sharpen your moves from home.',
+    zh: '舞蹈教学平台，实现精准动捕，在家也能精进舞蹈技术。',
+  },
+  'project.HumiHop.tech.0': { en: 'Python', zh: 'Python' },
+  'project.HumiHop.tech.1': { en: 'JavaScript', zh: 'JavaScript' },
+  'project.HumiHop.tech.2': { en: 'Motion Capture', zh: '动作捕捉' },
+
+  'project.Mapify.title': {
+    en: 'Mapify',
+    zh: 'Mapify',
+  },
+  'project.Mapify.body': {
+    en: 'Untangles the logic of an entire LLM conversation and visualizes it as a graph, making chats easier to follow.',
+    zh: '梳理与大模型整场对话的逻辑关系并图谱可视化，让聊天更有条理。',
+  },
+  'project.Mapify.tech.0': { en: 'TypeScript', zh: 'TypeScript' },
+  'project.Mapify.tech.1': { en: 'JavaScript', zh: 'JavaScript' },
+  'project.Mapify.tech.2': { en: 'LLM', zh: '大模型' },
+
+  'project.ZhongcheCup.title': {
+    en: 'BladeSight',
+    zh: 'BladeSight',
+  },
+  'project.ZhongcheCup.body': {
+    en: 'A complete non-contact wind-turbine inspection system delivering a sub-pixel-accurate detection algorithm.',
+    zh: '一套完整的非接触式风机巡检系统，负责计算机视觉部分，实现亚像素精度识别算法。',
+  },
+  'project.ZhongcheCup.tech.0': { en: 'Python', zh: 'Python' },
+  'project.ZhongcheCup.tech.1': { en: 'Computer Vision', zh: '计算机视觉' },
+  'project.ZhongcheCup.tech.2': { en: 'Sub-pixel', zh: '亚像素' },
+
+  'project.LingTour.title': {
+    en: 'LingTour',
+    zh: 'LingTour',
+  },
+  'project.LingTour.body': {
+    en: 'Precisely matches travelers with local guides, reinventing the on-the-ground travel experience.',
+    zh: '实现游客与地方领队精准匹配，重塑游客旅游体验。',
+  },
+  'project.LingTour.tech.0': { en: 'TypeScript', zh: 'TypeScript' },
+  'project.LingTour.tech.1': { en: 'Vue', zh: 'Vue' },
+  'project.LingTour.tech.2': { en: 'WeChat MP', zh: '微信小程序' },
+
+  'project.MiniSQL.title': {
+    en: 'MiniSQL',
+    zh: 'MiniSQL',
+  },
+  'project.MiniSQL.body': {
+    en: 'A hand-written MiniSQL database system, implementing the full database stack from the ground up.',
+    zh: '手写 MiniSQL 数据库系统，从底层开始实现数据库完整功能。',
+  },
+  'project.MiniSQL.tech.0': { en: 'C++', zh: 'C++' },
+  'project.MiniSQL.tech.1': { en: 'C', zh: 'C' },
+  'project.MiniSQL.tech.2': { en: 'Yacc/Lex', zh: 'Yacc/Lex' },
+
+  // Awards section heading + nav
+  'awards.heading': { en: 'Awards & Honors', zh: '我拿过的奖' },
+  'awards.prev': { en: 'Previous', zh: '上一个' },
+  'awards.next': { en: 'Next', zh: '下一个' },
+
+  // Awards (filename → key)
+  'award.ResearchTraining.title': {
+    en: 'National College Student Innovation Training Program',
+    zh: '国家级科研训练计划',
+  },
+  'award.ResearchTraining.body': {
+    en: 'Selected',
+    zh: '项目入选',
+  },
+  'award.ResearchTraining.tags.0': { en: 'Selected', zh: '项目入选' },
+  'award.ResearchTraining.tags.1': { en: 'National Level', zh: '国家级' },
+
+  'award.CRRCCup2026.title': {
     en: 'CRRC Cup Renewable Energy Sci-Tech Competition',
-    zh: '中车杯全国大学生可再生能源科技竞赛',
+    zh: '"中国中车杯"全国大学生可再生能源科技作品竞赛',
   },
-  'project.CRRCCup2026.body': {
-    en: 'First Prize at the 8th National College Student Renewable Energy Excellent Sci-Tech Works Competition ("CRRC Cup"), 2026.',
-    zh: '“中国中车杯”第八届全国大学生可再生能源优秀科技作品竞赛一等奖',
+  'award.CRRCCup2026.body': {
+    en: 'First Prize',
+    zh: '一等奖',
   },
-  'project.CRRCCup2026.tech.0': { en: 'First Prize', zh: '一等奖' },
-  'project.CRRCCup2026.tech.1': { en: 'National Level', zh: '国家级' },
+  'award.CRRCCup2026.tags.0': { en: 'First Prize', zh: '一等奖' },
+  'award.CRRCCup2026.tags.1': { en: 'National Level', zh: '国家级' },
 
-  'project.PKUGeek2026.title': {
-    en: 'PKU New Youth Geek Hackathon — Tencent Light Public-Welfare Track',
-    zh: '北大新青年极客马拉松 · 腾讯 Light 公益赛道',
-  },
-  'project.PKUGeek2026.body': {
-    en: '3rd place at the Peking University 2026 New Youth Geek Hackathon, Tencent Light Public-Welfare track.',
-    zh: '在北京大学 2026 年新青年极客马拉松腾讯 Light 公益赛道中获得季军（第三名）。',
-  },
-  'project.PKUGeek2026.tech.0': { en: '3rd Place', zh: '季军' },
-  'project.PKUGeek2026.tech.1': { en: 'Hackathon', zh: '黑客松' },
-
-  'project.Puyingjin2026.title': {
-    en: 'ZJU Puyingjin Innovation & Entrepreneurship Competition',
-    zh: '浙江大学"蒲公英杯"学生创新创业竞赛',
-  },
-  'project.Puyingjin2026.body': {
-    en: 'Gold "Suiying" Award (1st place) at the 18th Zhejiang University "Puyingjin" Student Innovation and Entrepreneurship Competition, 2026.',
-    zh: '在浙江大学第十八届"蒲公英杯"学生创新创业竞赛中获得"穗英"金奖（第一名）。',
-  },
-  'project.Puyingjin2026.tech.0': { en: 'Gold (1st)', zh: '金奖（第一名）' },
-  'project.Puyingjin2026.tech.1': { en: 'University Level', zh: '校级' },
-
-  'project.YangtzeDelta2026.title': {
+  'award.YangtzeDelta2026.title': {
     en: 'Yangtze River Delta Student Entrepreneurship Practice Competition',
-    zh: '长三角学生创新创业实践竞赛',
+    zh: '长三角地区大学生创新创业实践赛',
   },
-  'project.YangtzeDelta2026.body': {
-    en: 'Runner-up (2nd place) at the 2026 Yangtze River Delta Student Innovation and Entrepreneurship Practice Competition, representing Zhejiang University.',
-    zh: '代表浙江大学参加 2026 年长三角学生创新创业实践竞赛，获得亚军（第二名）。',
+  'award.YangtzeDelta2026.body': {
+    en: 'Runner-up (2nd place)',
+    zh: '亚军（第二名）',
   },
-  'project.YangtzeDelta2026.tech.0': { en: 'Award', zh: '获奖' },
-  'project.YangtzeDelta2026.tech.1': { en: 'National Level', zh: '国家级' },
+  'award.YangtzeDelta2026.tags.0': { en: 'Runner-up', zh: '亚军' },
+  'award.YangtzeDelta2026.tags.1': { en: 'National Level', zh: '国家级' },
+
+  'award.Puyingjin2026.title': {
+    en: 'ZJU Puyingjin Innovation & Entrepreneurship Competition',
+    zh: '浙江大学"蒲公英"大学生创新大赛',
+  },
+  'award.Puyingjin2026.body': {
+    en: 'Gold "Suiying" Award (1st place)',
+    zh: '金穗奖（第一名）',
+  },
+  'award.Puyingjin2026.tags.0': { en: 'Gold (1st)', zh: '金奖' },
+  'award.Puyingjin2026.tags.1': { en: 'University Level', zh: '校级' },
+
+  'award.AIHackathon2026.title': {
+    en: 'AI Hackathon Tour 2026 — ZJU Stop',
+    zh: 'AI Hackathon Tour 2026 浙大站',
+  },
+  'award.AIHackathon2026.body': {
+    en: 'Runner-up (2nd place)',
+    zh: '亚军（第二名）',
+  },
+  'award.AIHackathon2026.tags.0': { en: '2nd Place', zh: '亚军' },
+  'award.AIHackathon2026.tags.1': { en: 'Hackathon', zh: '黑客松' },
+
+  'award.PKUGeek2026.title': {
+    en: 'PKU New Youth Geek Hackathon',
+    zh: '北京大学新青年极客松',
+  },
+  'award.PKUGeek2026.body': {
+    en: '3rd place',
+    zh: '季军（第三名）',
+  },
+  'award.PKUGeek2026.tags.0': { en: '3rd Place', zh: '季军' },
+  'award.PKUGeek2026.tags.1': { en: 'Hackathon', zh: '黑客松' },
+
+  'award.ChuangyingFuture.title': {
+    en: 'Chuangying Future Innovation Competition',
+    zh: '“创赢未来”2026创业大赛杭州市选拔赛',
+  },
+  'award.ChuangyingFuture.body': {
+    en: 'Second Prize',
+    zh: '二等奖',
+  },
+  'award.ChuangyingFuture.tags.0': { en: '2nd Place', zh: '二等奖' },
+  'award.ChuangyingFuture.tags.1': { en: 'City Level', zh: '市级' },
+
+  'award.LarkAI.title': {
+    en: 'Lark AI Campus Challenge',
+    zh: '飞书AI校园挑战赛',
+  },
+  'award.LarkAI.body': {
+    en: 'Direct to the finals',
+    zh: '直通决赛',
+  },
+  'award.LarkAI.tags.0': { en: 'Direct to the finals', zh: '直通决赛' },
+  'award.LarkAI.tags.1': { en: 'Hackathon', zh: '黑客松' },
 };
 
 export default translations;

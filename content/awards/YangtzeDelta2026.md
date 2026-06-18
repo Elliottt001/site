@@ -1,15 +1,10 @@
 ---
-date: '2026-06-01'
+date: '2026-04-01'
 title: 'Yangtze River Delta Student Entrepreneurship Practice Competition'
-github: ''
-external: ''
-ios: ''
-android: ''
-company: ''
-tech:
+tags:
   - Award
   - National Level
-showInProjects: true
+showInAwards: true
 ---
 
 Runner-up (2nd place) at the 2026 Yangtze River Delta Student Innovation and Entrepreneurship Practice Competition, representing Zhejiang University.
