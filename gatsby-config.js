@@ -2,10 +2,10 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Ruizhe Zhang',
+    title: 'Elliottt Zhang',
     description:
-      'Ruizhe Zhang (张瑞喆) is a software engineering undergraduate at Zhejiang University, focused on AI agents, LLM systems, and cloud-native deployment.',
-    siteUrl: 'https://elliottt001.github.io', // No trailing slash allowed!
+      'Elliottt Zhang is a software engineering undergraduate at Zhejiang University, focused on AI agents, LLM systems, especially LLM memory.',
+    siteUrl: 'https://me.elliotttzhang.cn', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '',
   },
@@ -20,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Ruizhe Zhang',
-        short_name: 'Ruizhe Zhang',
+        name: 'Elliottt Zhang',
+        short_name: 'Elliottt Zhang',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
